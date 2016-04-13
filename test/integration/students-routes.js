@@ -54,7 +54,6 @@ describe('student routes', function() {
             res.body.firstName.should.equal('Kevin');
             res.body.lastName.should.equal('Schwartz');
             res.body.year.should.equal(2001);
-            res.body._id.should.equal(student.id);
             done();
         });
       });
