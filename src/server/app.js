@@ -5,7 +5,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var mongoose = require('mongoose');
+var config = require('../_config');
 
 // *** routes *** //
 var routes = require('./routes/index.js');
@@ -14,6 +15,16 @@ var routes = require('./routes/index.js');
 // *** express instance *** //
 var app = express();
 
+
+// *** set up mongo *** //
+var environment = process.env.NODE_ENV || 'development';
+var mongoURI = config.mongoURI[environment];
+
+mongoose.connect(mongoURI, function(err, res) {
+  if (err) {
+    console.log('Error connecting to the database. ' + err);
+  }
+});
 
 // *** view engine *** //
 // var swig = new swig.Swig();
@@ -26,7 +37,9 @@ app.set('views', path.join(__dirname, 'views'));
 
 
 // *** config middleware *** //
-app.use(logger('dev'));
+if (process.env.NODE_ENV !== 'test') {
+  app.use(logger('dev'));
+}
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
