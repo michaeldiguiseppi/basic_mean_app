@@ -78,20 +78,25 @@ describe('student routes', function() {
         });
     });
   });
-  describe('/PUT students', function() {
-    it('should update one student', function(done) {
-      chai.request(server)
-      .get('/students')
-      .end(function(err, res) {
+  describe('/PUT students/:id', function() {
+    it('should return a single student', function(done) {
+      Student.findOne(function(err, student) {
+        var studentID = student._id;
         chai.request(server)
-          .put('/students/'+res.body.data[0]._id)
-          .send({firstName: 'Michael'})
-          .end(function(err, res) {
-            res.status.should.equal(200);
-            res.type.should.equal('application/json');
-            res.body.should.be.a('object');
-            res.body.firstName.should.equal('Michael');
-            done();
+        .put('/students/'+studentID)
+        .send({firstName: 'Tyler'})
+        .end(function(err, res) {
+          res.status.should.equal(200);
+          res.type.should.equal('application/json');
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.equal('success');
+          res.body.data.should.be.a('object');
+          res.body.data.firstName.should.equal('Tyler');
+          res.body.data.lastName.should.equal('Schwartz');
+          res.body.data.year.should.equal(2001);
+          done();
         });
       });
     });

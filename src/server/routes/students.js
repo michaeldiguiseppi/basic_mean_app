@@ -29,17 +29,21 @@ router.post('/', function(req, res, next) {
 });
 
 router.put('/:id', function(req, res, next) {
-  Students.findByIdAndUpdate(req.params.id, {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    year: req.body.year
-  }, {new: true}, function(err, student) {
-    res.status(200).json(student);
+  var studentID = req.params.id;
+  Student.findByIdAndUpdate(studentID, req.body, {new: true},
+    function(err, student) {
+    if(err) {
+      return next(err);
+    }
+    res.status(200).json({
+      status: 'success',
+      data: student
+    });
   });
 });
 
 router.delete('/:id', function(req, res, next) {
-  Students.findByIdAndRemove(req.params.id, {new: true}, function(err, student) {
+  Students.findByIdAndRemove(req.params.id, function(err, student) {
     res.status(200).json(student);
   });
 });
