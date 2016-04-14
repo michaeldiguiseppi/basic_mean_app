@@ -29,8 +29,6 @@ router.post('/', function(req, res, next) {
 });
 
 router.put('/:id', function(req, res, next) {
-  console.log('HERE!');
-  console.log(req.body);
   Students.findByIdAndUpdate(req.params.id, {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
