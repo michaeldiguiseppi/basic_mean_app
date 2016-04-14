@@ -1,13 +1,19 @@
 language: node_js
-
 node_js:
-  - "5"
-  - "4.1"
-  - "4.0"
-  - '0.12'
-  - '0.11'
-
+- '5'
+- '4.1'
+- '4.0'
+- '0.12'
+- '0.11'
 services: mongodb
-
 before_script:
-  - npm install -g mocha
+- npm install -g mocha
+deploy:
+  provider: heroku
+  api_key:
+    secure: GQrm+HeQUbjbZBvsvij3HsY3cROu2GpLtBqevtowFzgMxJ1QZYTICp6EDufBS30Tm7jpbX9Ss+DJgiT5ClCNqCSc8MYtovRcZiGYiS8SXsyo2M8a5nSDe5hUEcUf8p07ihuVh8zclT7Dnv2D9QM9b1kwSF7fjNl5FcF3JmhnPzF2ejwbxDPsiyoA6T7DIO+9Cgkbk1tHX+yMKEjOTNqliu8N6UZOAA6i0vRxFlPAHOOiZGQoXSKI0dS9ESK++dw7lnuXbOoojrmOApm+ILj7PXpUmDrpyHHqXsbMizfIQSUkGvGLL0uchI0IYhsHDnI1U+TmEtijxjDV1P7yYAqVXEc0sXkNHytZ1lIjz2KcVOuksfOrLSJiI467fSEFqgxEhZGhle+lHFHwGkwy/i50LUt7AB1tyC4UrnCofRurS9OuPS71wAOHgKjeRkNu2TWQO/x+jTiSUxaQeryWLdj3UN5jFOJ0jc8VOS1DZLY89MPNsYJ74tiB/XihbPHbmSJ8RbruLDRcOwuKlqjJUpkXDbAyru/bVlECP0ar+X/5Kp/QvjMjglEuUCK6dJyojns7ESlyZs7iIydJPbbswqodaUnE1/pD00xz2dDko5Wz9RnA8yI2i/XHCdjjWoHb+1HTP2mvfpzm150gD45BfQqc6Xtgtlwr/ia+QClE5Jo1UmI=
+  app: miked-students
+  on:
+    repo: michaeldiguiseppi/basic_mean_app
+    branch: master
+    node: '5'
