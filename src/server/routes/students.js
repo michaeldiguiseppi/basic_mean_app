@@ -30,7 +30,8 @@ router.post('/', function(req, res, next) {
 
 router.put('/:id', function(req, res, next) {
   var studentID = req.params.id;
-  Student.findByIdAndUpdate(studentID, req.body, {new: true},
+  console.log(req.body);
+  Students.findByIdAndUpdate(studentID, req.body, {new: true},
     function(err, student) {
     if(err) {
       return next(err);
