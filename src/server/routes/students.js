@@ -29,14 +29,19 @@ router.post('/', function(req, res, next) {
 });
 
 router.put('/:id', function(req, res, next) {
-  Students.findOne({_id: req.params.id}, function(err, student) {
-    student.firstName = req.body.firstName;
+  console.log('HERE!');
+  console.log(req.body);
+  Students.findByIdAndUpdate(req.params.id, {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    year: req.body.year
+  }, {new: true}, function(err, student) {
     res.status(200).json(student);
   });
 });
 
 router.delete('/:id', function(req, res, next) {
-  Students.remove({_id: req.params.id}, function(err, student) {
+  Students.findByIdAndRemove(req.params.id, function(err, student) {
     res.status(200).json(student);
   });
 });
