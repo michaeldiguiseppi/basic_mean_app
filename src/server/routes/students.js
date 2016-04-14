@@ -39,7 +39,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 router.delete('/:id', function(req, res, next) {
-  Students.findByIdAndRemove(req.params.id, function(err, student) {
+  Students.findByIdAndRemove(req.params.id, {new: true}, function(err, student) {
     res.status(200).json(student);
   });
 });
