@@ -22,7 +22,6 @@ app.service('studentDataService', ['crudService', function(crudService) {
     }
   };
 }]);
-
 app.service('crudService', ['$http', function($http) {
   return {
     getAll: function(resource) {
