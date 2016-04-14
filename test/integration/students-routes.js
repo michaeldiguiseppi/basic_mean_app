@@ -81,7 +81,7 @@ describe('student routes', function() {
   describe('/PUT students/:id', function() {
     it('should return a single student', function(done) {
       Students.findOne(function(err, student) {
-        var studentID = student._id;
+        var studentID = student.id;
         chai.request(server)
         .put('/students/'+studentID)
         .send({firstName: 'Tyler'})
