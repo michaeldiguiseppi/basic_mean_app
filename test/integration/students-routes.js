@@ -44,9 +44,10 @@ describe('student routes', function() {
   });
   describe('/GET one student', function() {
     it('should return one student', function(done) {
-      Students.findOne(function(err, student) {
+      Students.findOne()
+      .then(function(student){
         chai.request(server)
-          .get('/students/'+student._id)
+          .get('/students/'+student.id)
           .end(function(err, res) {
             res.status.should.equal(200);
             res.type.should.equal('application/json');
@@ -80,7 +81,7 @@ describe('student routes', function() {
   });
   describe('/PUT students/:id', function() {
     it('should return a single student', function(done) {
-      Students.findOne(function(err, student) {
+      Students.findOne().then(function(student) {
         var studentID = student.id;
         chai.request(server)
         .put('/students/'+studentID)
@@ -103,7 +104,7 @@ describe('student routes', function() {
   });
   describe('/DELETE students', function() {
     it('should delete one student', function(done) {
-      Students.findOne(function(err, student) {
+      Students.findOne().then(function(student) {
         chai.request(server)
           .delete('/students/'+student._id)
           .end(function(err, response) {
