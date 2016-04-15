@@ -1,52 +1,65 @@
 var express = require('express');
 var router = express.Router();
-var Students = require('../models/students');
-
+var Student = require('../models/students');
+var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 
 router.get('/', function(req, res, next) {
-  Students.find(function(err, students) {
-    if (err) {
+  Student.find()
+    .then(function(students) {
+      res.status(200).json({
+        status: 'success',
+        data: students,
+      });
+    })
+    .catch(function(err) {
       return next(err);
-    }
-    res.status(200).json({
-      status: 'success',
-      data: students,
     });
-  });
 });
 
 router.get('/:id', function(req, res, next) {
-  Students.findOne({_id: req.params.id}, function(err, student) {
-    res.status(200).json(student);
-  });
+  Student.findOne({_id: req.params.id})
+    .then(function(student) {
+      res.status(200).json(student);
+    })
+    .catch(function(err) {
+      return next(err);
+    });
 });
 
 router.post('/', function(req, res, next) {
-  var student = new Students(req.body);
-  student.save(function(err, saved) {
-    res.status(200).json(saved);
-  });
+  var student = new Student(req.body);
+  student.save()
+    .then(function(student) {
+      res.status(200).json(student);
+    })
+    .catch(function(err) {
+      return next(err);
+    });
 });
 
 router.put('/:id', function(req, res, next) {
   var studentID = req.params.id;
-  console.log(req.body);
-  Students.findByIdAndUpdate(studentID, req.body, {new: true},
-    function(err, student) {
-    if(err) {
+  Student.findByIdAndUpdate(studentID, req.body, {new: true})
+    .then(function(student) {
+      res.status(200).json({
+        status: 'success',
+        data: student
+      });
+    })
+    .catch(function(err) {
       return next(err);
-    }
-    res.status(200).json({
-      status: 'success',
-      data: student
     });
-  });
 });
 
 router.delete('/:id', function(req, res, next) {
-  Students.findByIdAndRemove(req.params.id, function(err, student) {
-    res.status(200).json(student);
-  });
+  Student.findByIdAndRemove(req.params.id)
+    .then(function(student) {
+      res.status(200).json(student);
+    })
+    .catch(function(err) {
+      return next(err);
+    });
 });
 
 module.exports = router;
