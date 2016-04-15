@@ -38,7 +38,7 @@ describe('student routes', function() {
             res.body.data[0].firstName.should.equal('Kevin');
             res.body.data[0].lastName.should.equal('Schwartz');
             res.body.data[0].year.should.equal(2001);
-            done();
+            return done();
         });
     });
   });
@@ -57,7 +57,7 @@ describe('student routes', function() {
             res.body.firstName.should.equal('Kevin');
             res.body.lastName.should.equal('Schwartz');
             res.body.year.should.equal(2001);
-            done();
+            return done();
         });
       });
     });
@@ -77,7 +77,7 @@ describe('student routes', function() {
             res.body.firstName.should.equal('Michael');
             res.body.lastName.should.equal('DiGuiseppi');
             res.body.year.should.equal(2003);
-            done();
+            return done();
         });
     });
   });
@@ -101,7 +101,7 @@ describe('student routes', function() {
           res.body.data.firstName.should.equal('Tyler');
           res.body.data.lastName.should.equal('Schwartz');
           res.body.data.year.should.equal(2001);
-          done();
+          return done();
         });
       });
     });
@@ -123,7 +123,7 @@ describe('student routes', function() {
                 res.body.status.should.equal('success');
                 res.body.should.have.property('data');
                 res.body.data.length.should.equal(0);
-                done();
+                return done();
             });
         });
       });
