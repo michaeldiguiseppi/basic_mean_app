@@ -12,6 +12,8 @@ config.mongoURI = {
 //   production: 12,
 // };
 
+config.SECRET_KEY = '\x1e\xa9\x96fV\xbbfK\xbc\xec\xe6V-7\x15\xd7\x91J\n\x7f\xd8\xf6+\xba';
+
 config.SALT_WORK_FACTOR = 10;
 
 
