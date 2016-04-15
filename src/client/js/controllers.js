@@ -26,3 +26,34 @@ app.controller('addStudentController', ['$scope', 'studentDataService', function
   $scope.updateStudents();
   $scope.edit = false;
 }]);
+
+
+app.controller('signupController', ['$scope', '$location', 'authService', function($scope,  $location, authService) {
+  $scope.user = {};
+  $scope.register = function() {
+      authService.register($scope.user)
+        .then(function(user) {
+          authService.setUserInfo(user);
+          $location.path('/');
+        })
+        .catch(function(err) {
+          // TODO - check status code and show appropriate message.
+          console.log(err);
+        });
+  };
+}]);
+
+app.controller('loginController', ['$scope', '$location', 'authService', function($scope, $location, authService) {
+  $scope.user = {};
+  $scope.login = function() {
+      authService.login($scope.user)
+        .then(function(user) {
+          authService.setUserInfo(user);
+          $location.path('/');
+        })
+        .catch(function(err) {
+          // TODO - check status code and show appropriate message.
+          console.log(err);
+        });
+  };
+}]);

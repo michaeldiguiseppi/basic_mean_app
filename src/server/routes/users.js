@@ -16,11 +16,12 @@ router.post('/register', function(req, res, next) {
           message: 'Email already exists.'
         });
       }
-    });
     // create a new user
     var newUser = new User(req.body);
-    newUser.save(function() {
+    console.log(newUser);
+    newUser.save(function(user) {
       // create token
+      console.log(user);
       var token = generateToken(user);
       res.status(200).json({
         status: 'success',
@@ -30,14 +31,16 @@ router.post('/register', function(req, res, next) {
         }
       });
     });
+  });
 });
 
 // login
 router.post('/login', function(req, res, next) {
   // ensure user exists
+  console.log(req.body);
   User.findOne({email: req.body.email}, function(err, user) {
     if (err) return next(err);
-    if (user) {
+    if (!user) {
       return res.status(401).json({
         status: 'fail',
         message: 'Email does not exist.'
@@ -45,6 +48,7 @@ router.post('/login', function(req, res, next) {
     }
     // compare the plain text password with the hashed/salted password.
     user.comparePassword(req.body.password, function(err, match) {
+      console.log('Error', err);
       if (err) return next(err);
       if (!match) {
         return res.status(401).json({
@@ -78,7 +82,7 @@ function generateToken(user) {
   var payload = {
     exp: moment().add(14, 'days').unix(),
     iat: moment().unix(),
-    sub: user._id,
+    sub: user.id,
   };
   return jwt.encode(payload, config.SECRET_KEY);
 }

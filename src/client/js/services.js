@@ -68,3 +68,42 @@ app.service('crudService', ['$http', function($http) {
     }
   };
 }]);
+
+/**
+1. login a User
+2. log out
+3. register
+4. set user info into localstorage
+5. get user info from localstorage
+
+**/
+app.service('authService', ['$http', '$window', function($http, $window) {
+  var user = {};
+  return {
+    login: function(user) {
+      return $http({
+        method: 'POST',
+        url: '/auth/login',
+        data: user
+      });
+    },
+    logout: function(user) {
+      user = null;
+      $window.localStorage.clear();
+    },
+    register: function(user) {
+      return $http({
+        method: 'POST',
+        url: '/auth/register',
+        data: user
+      });
+    },
+    setUserInfo: function(userData) {
+      $window.localStorage.setItem('user', JSON.stringify(userData.data.data.user));
+      $window.localStorage.setItem('token', JSON.stringify(userData.data.data.token));
+    },
+    getUserInfo: function() {
+      $window.localStorage.getItem('user');
+    }
+  };
+}]);
