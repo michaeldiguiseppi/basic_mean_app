@@ -107,3 +107,23 @@ app.service('authService', ['$http', '$window', function($http, $window) {
     }
   };
 }]);
+
+app.service('authInterceptor', ['$window', '$q', function($window, $q){
+  return {
+    // always make sure to return anything you use here!
+    request: function(config){
+      // check for token in headers
+      // config.headers['X-requested-with'] = XMLHttpRequest;
+      var token = $window.localStorage.getItem('token');
+      if (token) {
+        config.headers.Authorization = "Bearer " + token;
+        // return $q.resolve(config);
+      }
+      return config;
+    },
+    responseError: function(err){
+      // if header auth is not present throw an error
+      return err;
+    }
+  };
+}]);

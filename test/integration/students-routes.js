@@ -59,6 +59,9 @@ describe('student routes', function() {
             res.body.year.should.equal(2001);
             return done();
         });
+      }).catch(function(err) {
+        console.log('CATCH CLAUSE!', err);
+        done();
       });
     });
   });
