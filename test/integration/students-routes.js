@@ -49,6 +49,7 @@ describe('student routes', function() {
         chai.request(server)
           .get('/students/'+student.id)
           .end(function(err, res) {
+            console.log('ENDING GET ONE');
             res.status.should.equal(200);
             res.type.should.equal('application/json');
             res.body.should.be.a('object');
@@ -87,6 +88,7 @@ describe('student routes', function() {
         .put('/students/'+studentID)
         .send({firstName: 'Tyler'})
         .end(function(err, res) {
+          console.log('ENDING UPDATE ONE');
           res.status.should.equal(200);
           res.type.should.equal('application/json');
           res.body.should.be.a('object');
