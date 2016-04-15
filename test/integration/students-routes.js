@@ -47,7 +47,7 @@ describe('student routes', function() {
       Students.findOne()
       .then(function(student){
         chai.request(server)
-          .get('/students/'+student._id)
+          .get('/students/'+student.id)
           .end(function(err, res) {
             res.status.should.equal(200);
             res.type.should.equal('application/json');
