@@ -46,6 +46,7 @@ describe('student routes', function() {
     it('should return one student', function(done) {
       Students.findOne()
       .then(function(student){
+        console.log(student.id, student._id);
         chai.request(server)
           .get('/students/'+student.id)
           .end(function(err, res) {
@@ -84,6 +85,7 @@ describe('student routes', function() {
     it('should return a single student', function(done) {
       Students.findOne().then(function(student) {
         var studentID = student._id;
+        console.log(student.id, student._id);
         chai.request(server)
         .put('/students/'+studentID)
         .send({firstName: 'Tyler'})
