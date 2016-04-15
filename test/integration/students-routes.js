@@ -46,7 +46,7 @@ describe('student routes', function() {
     it('should return one student', function(done) {
       Students.findOne()
       .then(function(student){
-        console.log(student.id, student._id);
+        console.log(student);
         chai.request(server)
           .get('/students/'+student.id)
           .end(function(err, res) {
