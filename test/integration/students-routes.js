@@ -55,9 +55,9 @@ describe('student routes', function() {
             res.status.should.equal(200);
             res.type.should.equal('application/json');
             res.body.should.be.a('object');
-            res.body.data.firstName.should.equal('Kevin');
-            res.body.data.lastName.should.equal('Schwartz');
-            res.body.data.year.should.equal(2001);
+            res.body.firstName.should.equal('Kevin');
+            res.body.lastName.should.equal('Schwartz');
+            res.body.year.should.equal(2001);
             return done();
         });
       }).catch(function(err) {
@@ -78,9 +78,9 @@ describe('student routes', function() {
           .end(function(err, res) {
             res.status.should.equal(200);
             res.body.should.be.a('object');
-            res.body.data.firstName.should.equal('Michael');
-            res.body.data.lastName.should.equal('DiGuiseppi');
-            res.body.data.year.should.equal(2003);
+            res.body.firstName.should.equal('Michael');
+            res.body.lastName.should.equal('DiGuiseppi');
+            res.body.year.should.equal(2003);
             return done();
         });
     });

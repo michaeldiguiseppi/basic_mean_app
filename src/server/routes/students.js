@@ -20,10 +20,7 @@ router.get('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
   Student.findOne({_id: req.params.id})
     .then(function(student) {
-      res.status(200).json({
-        status: 'success',
-        data: student
-      });
+      res.status(200).json(student);
     })
     .catch(function(err) {
       return next(err);
@@ -34,10 +31,7 @@ router.post('/', function(req, res, next) {
   var student = new Student(req.body);
   student.save()
     .then(function(student) {
-      res.status(200).json({
-        status: 'success',
-        data: student
-      });
+      res.status(200).json(student);
     })
     .catch(function(err) {
       return next(err);
@@ -61,10 +55,7 @@ router.put('/:id', function(req, res, next) {
 router.delete('/:id', function(req, res, next) {
   Student.findByIdAndRemove(req.params.id)
     .then(function(student) {
-      res.status(200).json({
-        status: 'success',
-        data: student
-      });
+      res.status(200).json(student);
     })
     .catch(function(err) {
       return next(err);
